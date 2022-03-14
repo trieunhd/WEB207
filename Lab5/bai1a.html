@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="myctrl1" class="col-8 m-auto py-3">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <i class="fas fa-list me-2"></i> FORM THÔNG TIN SINH VIÊN
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form1Example1" class="form-control" ng-model="$parent.student.fullname"/>
+                        <label class="form-label" for="form1Example1">Họ và tên</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form1Example2" class="form-control" ng-model="$parent.student.birthday"/>
+                        <label class="form-label" for="form1Example2">Ngày sinh</label>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form1Example3" class="form-control" ng-model="$parent.student.mark"/>
+                        <label class="form-label" for="form1Example3">Điểm</label>
+                    </div>
+
+                    <button class="btn btn-success" ng-click="save()">LƯU</button>
+                    <button class="btn btn-danger" ng-click="cancel()">HỦY</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted">Chú ý: nhập điểm từ 0-10, ngày dd/mm/yyyy</div>
+        </div>
+    </div>
+    <div ng-controller="myctrl2" class="col-8 m-auto py-3">
+        <table class="table table-bordered border-primar">
+            <thead>
+                <tr class="bg-warning">
+                    <th scope="col">Name</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">Mark</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="sv in students">
+                    <th>{{sv.fullname}}</th>
+                    <td>{{sv.birthday}}</td>
+                    <td>{{sv.mark}}</td>
+                    <td><button class="btn" ng-click="edit($index)">Sửa</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl1", function($scope, $rootScope){
+        $scope.save = function(){
+            $rootScope.students[$rootScope.index] = $scope.student;
+            console.log($rootScope.index);
+        }
+        $scope.cancel = function(){
+            $rootScope.student = angular.copy($rootScope.students[$rootScope.index])
+        }
+    })
+
+    app.controller("myctrl2", function($scope, $rootScope){
+        $rootScope.students = [
+            { fullname: "Thi Hoài", birthday: "05/05/2000", mark: 8.5 },
+            { fullname: "Đỗ Đạt Cao", birthday: "24/03/2000", mark: 9 },
+            { fullname: "Đào Kho Báo", birthday: "05/04/2001", mark: 7.5 },
+            { fullname: "Mai Thanh Toán", birthday: "09/10/2000", mark: 6 },
+        ];
+
+        $scope.edit = function(chiso){
+            $rootScope.index = chiso;
+
+            $rootScope.student = angular.copy($rootScope.students[chiso]);
+        }
+    })
+</script>
+
+</html>

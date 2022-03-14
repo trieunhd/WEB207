@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="col-8 m-auto py-4">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+            NHẬP LƯƠNG
+        </button>
+
+        <!-- Tabs navs -->
+        <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                    aria-controls="ex1-tabs-1" aria-selected="true"><i class="fas fa-list me-2"></i>DANH SÁCH</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab"
+                    aria-controls="ex1-tabs-2" aria-selected="false"><i class="fas fa-save me-2"></i>CẬP NHẬT</a>
+            </li>
+        </ul>
+        <!-- Tabs navs -->
+
+        <!-- Tabs content -->
+        <div class="tab-content" id="ex1-content">
+            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                <div class="card  ">
+                    <div class="card-header fw-bold">
+                        <i class="fas fa-list me-2"></i> Bảng lương tháng 12
+                    </div>
+                    <div class="card-body p-0">
+                        <table class="table table-bordered table-hover">
+                            <thead class="text-center bg-warning">
+                                <tr>
+                                    <th scope="col" class="align-middle" rowspan="2">Mã NV</th>
+                                    <th scope="col" class="align-middle" rowspan="2">Họ và tên</th>
+                                    <th scope="col" class="align-middle" colspan="3">Thu nhập</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Lương</th>
+                                    <th scope="col">Thưởng</th>
+                                    <th scope="col">Phụ cấp</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">NV100</th>
+                                    <td>Nguyễn Công Phượng</td>
+                                    <td>5000000</td>
+                                    <td>500000</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NV101</th>
+                                    <td>Phan Văn Tài Em</td>
+                                    <td>9000000</td>
+                                    <td>600000</td>
+                                    <td>100000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">NV102</th>
+                                    <td>Lê Huỳnh Đức</td>
+                                    <td>7000000</td>
+                                    <td>300000</td>
+                                    <td>200000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Lương của cầu thủ và huấn luyện viên chuyên nghiệp
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                <div class="card  ">
+                    <div class="card-header fw-bold">
+                        <i class="fas fa-edit me-2"></i> Nhập lương tháng 12
+                    </div>
+                    <div class="card-body p-2">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form8Example1" class="form-control" />
+                                        <label class="form-label" for="form8Example1">Mã nhân viên</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline mb-4">
+                                        <input type="text" id="form8Example2" class="form-control" />
+                                        <label class="form-label" for="form8Example2">Họ và tên</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <select class="form-select" aria-label="Câu lạc bộ">
+                                        <option selected>Câu lạc bộ</option>
+                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                        <option value="Nghệ An">Nghệ An</option>
+                                        <option value="Quảng Ninh">Quảng Ninh</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline mb-4">
+                                        <input type="number" id="form8Example4" class="form-control" />
+                                        <label class="form-label" for="form8Example4">Lương</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="basic-url" class="form-label">Thưởng</label>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">VNĐ</span>
+                                        <input type="text" class="form-control" placeholder="Nhập tiền thưởng" />
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label for="basic-url" class="form-label">Phụ cấp</label>
+                                    <div class="input-group mb-4">
+                                        <span class="input-group-text">VNĐ</span>
+                                        <input type="text" class="form-control" placeholder="Nhập phụ cấp (nếu có)" />
+                                        <span class="input-group-text">.00</span>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-outline mb-4">
+                                        <textarea class="form-control" id="textAreaExample" rows="3"></textarea>
+                                        <label class="form-label" for="textAreaExample">Ghi chú</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Lưu
+                            </button>
+                            <button type="button" class="btn btn-secondary">
+                                <i class="fas fa-times me-2"></i>Hủy
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Vui lòng nhập thông tin lương của cầu thủ
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tabs content -->
+    </div>
+    <div class="col-8 m-auto py-4">
+        <div class="border border-info">
+            <div class="bg-light bg-gradient p-2">
+                <h3>THÊM TIN MỚI</h3>
+            </div>
+            <div class="p-4">
+                <form>
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form6Example3" class="form-control" />
+                        <label class="form-label" for="form6Example3">Nhập tiêu đề tin</label>
+                    </div>
+    
+                    <!-- Textarea input -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                        <label class="form-label" for="textAreaExample">Nhập tóm tắt của tin</label>
+                    </div>
+    
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form6Example3" class="form-control" />
+                        <label class="form-label" for="form6Example3">Nhập địa chỉ hình ảnh</label>
+                    </div>
+    
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+    
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="inputGroup-sizing-default">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <input type="email" class="form-control" placeholder="Nhập ngày đưa tin"
+                                    aria-describedby="inputGroup-sizing-default" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-outline">
+                                <input type="text" id="form6Example2" class="form-control" />
+                                <label class="form-label" for="form6Example2">Nhập tags của tin</label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row mb-4">
+                        <div class="col">
+                            <!-- Select  input -->
+                            <select class="form-select">
+                                <option selected>Chọn thể loại</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <!-- Select  input -->
+                            <select class="form-select">
+                                <option selected>Chọn loại tin</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <!-- Textarea input -->
+                    <div class="form-outline mb-4">
+                        <textarea class="form-control" id="textAreaExample" rows="4"></textarea>
+                        <label class="form-label" for="textAreaExample">Nhập nội dung của tin</label>
+                    </div>
+    
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary mb-4">LƯU DATABASE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8 m-auto py-4">
+        <div class="row">
+            <div class="col-6">
+                <iframe
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&q=Eiffel+Tower+Paris+France"
+                    width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <div class="col-6 ">
+                <div class="border border-info">
+                    <div class="text-center bg-info p-2">
+                        <h2>FORM LIÊN HỆ</h2>
+                        <i>Kính mời nhập thông tin bên dưới</i>
+                    </div>
+                    <div class="m-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i
+                                    class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nhập họ và tên của bạn"
+                                aria-describedby="inputGroup-sizing-default" />
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default"><i
+                                    class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn"
+                                aria-describedby="inputGroup-sizing-default" />
+                        </div>
+
+                        <div class="input-group input-group-lg mb-3">
+                            <span class="input-group-text" id="addon-wrapping"><i class="fas fa-comment"></i></span>
+                            <input type="text" class="form-control" aria-describedby="addon-wrapping"
+                                placeholder="Nhập nội dụng liên hệ" />
+                        </div>
+
+                        <button type="submit" class="btn btn-info btn-block">GỬI LIÊN HỆ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">NHẬP LƯƠNG THÁNG</h5>
+                    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form8Example1" class="form-control" />
+                                    <label class="form-label" for="form8Example1">Mã nhân viên</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form8Example2" class="form-control" />
+                                    <label class="form-label" for="form8Example2">Họ và tên</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <select class="form-select" aria-label="Câu lạc bộ">
+                                    <option selected>Câu lạc bộ</option>
+                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                    <option value="Nghệ An">Nghệ An</option>
+                                    <option value="Quảng Ninh">Quảng Ninh</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-outline mb-4">
+                                    <input type="number" id="form8Example4" class="form-control" />
+                                    <label class="form-label" for="form8Example4">Lương</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="basic-url" class="form-label">Thưởng</label>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-text">VNĐ</span>
+                                    <input type="text" class="form-control" placeholder="Nhập tiền thưởng" />
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="basic-url" class="form-label">Phụ cấp</label>
+                                <div class="input-group mb-4">
+                                    <span class="input-group-text">VNĐ</span>
+                                    <input type="text" class="form-control" placeholder="Nhập phụ cấp (nếu có)" />
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-outline mb-4">
+                                    <textarea class="form-control" id="textAreaExample" rows="3"></textarea>
+                                    <label class="form-label" for="textAreaExample">Ghi chú</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal"> <i
+                            class="fas fa-times me-2"></i>HỦY</button>
+                    <button type="button" class="btn btn-primary"><i class="fas fa-save me-2"></i>LƯU</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+
+</html>

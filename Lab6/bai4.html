@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>QUẢN TRỊ THỂ LOẠI</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="myctrl">
+        <div class="card">
+            <div class="card-header">CUSTOM VALIDATION</div>
+            <div class="card-body"> 
+                <form name="frmValid">
+                    <div class="form-outline">
+                        <input polyNumber name="txtNumber" ng-model="number" required type="number"  id="form12" class="form-control" />
+                        <label class="form-label" for="form12">Số Poly</label>
+                        <div class="form-helper" 
+                            ng-show="frmValid.txtNumber.$invalid && frmValid.txtNumber.dirty">
+                        Số này không chia hết cho 2 và 9</div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                <button  class="btn btn-primary">Kiểm tra</button>
+            </div>
+          </div>
+    </div>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script>
+    var app = angular.module("myapp", []);
+    app.directive("polyNumber", function (){
+        return {
+            require : "ngModel",
+            link: function (scope, element, attr, mCtrl){
+                mCtrl.$parsers.push(function (value){
+                    var number = parseInt(value);
+                    if(number % 2 == 0 && number % 9 == 0){
+                        mCtrl.$setValidity('charE', true);
+                    }
+                    else {
+                        mCtrl.$setValidity('charE', false);
+                    }
+                    return value;
+                });
+            }
+        }
+    });
+    app.controller("myctrl", function($scope){
+
+    })
+</script>
+
+
+</html>

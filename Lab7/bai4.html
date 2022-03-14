@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>SPA</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.8.0/angular-route.js"></script>
+</head>
+
+<body ng-app="LabSPA">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#!home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!Thể thao">Thể thao</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!Sức khỏe">Sức khỏe</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!Sống đẹp">Sản phẩm</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#!Thơ hay">Thơ hay</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr>
+        <div ng-view></div>
+    </div>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+
+<script>
+    var app = angular.module("LabSPA", ["ngRoute"]);
+    app.config(function ($routeProvider) {
+        $routeProvider
+            .when("/home", { template: "<h3>Đây là trang chủ</h3>" })
+            .when("/:ten", { templateUrl: "hiendstin.html", controller:"hientin" })
+    })
+</script>
+<script>
+    app.controller("hientin", function($scope, $http, $routeParams){
+        $scope.listtin=[];
+        $scope.sx="-Ngay";
+        var tenfile = $routeParams.ten;
+        var url = "tin/" + tenfile + ".js";
+
+        console.log(url);
+        $http.get(url).then(
+        function(r) { $scope.listtin = r.data;},
+        function(d) { alert('Lỗi' + d.statusText);}
+        );
+        $scope.sortBy = function(what){
+            $scope.sx = what;
+        }
+        $scope.pageSize = 3;
+        $scope.start = 0;
+
+        $scope.next = function(){
+            if($scope.start < $scope.listtin.length - $scope.pageSize){
+                $scope.start += $scope.pageSize;
+            }
+        }
+
+        $scope.prev = function(){
+            if($scope.start>0){
+                $scope.start -= $scope.pageSize;
+            }
+        }
+
+        $scope.first = function(){ $scope.start = 0;}
+
+        $scope.last = function(){
+            var sotrang = Math.ceil($scope.listtin.length / $scope.pageSize);
+            $scope.start = (sotrang - 1) * $scope.pageSize;
+        }
+       
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>QUẢN TRỊ THỂ LOẠI</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="myctrl">
+        <div class="card  ">
+            <div class="card-header fw-bold row">
+                <div class="col-8">
+                    <i class="fas fa-edit me-2"></i> DANH SÁCH HÀNG HÓA
+                </div>
+                <div class="col-4">
+                    NGUYEN VAN TEO -- 0097676757
+                </div>
+            </div>
+            <div class="card-body p-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" ng-click="sortBy('name')">SẢN PHẨM</th>
+                            <th scope="col" ng-click="sortBy('price')">ĐƠN GIÁ</th>
+                            <th scope="col" ng-click="sortBy('discount')">GIẢM GIÁ</th>
+                            <th scope="col" ng-click="sortBy('date')">NGÀY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="p in listsanpham | orderBy:sx | limitTo: pageSize:start">
+                            <td>{{p.name|uppercase }}</td>
+                            <td>{{p.price|currency }}</td>
+                            <td>{{p.discount|phantram:2}}</td>
+                            <td>{{p.date|date : 'dd/MM/yyyy' }}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-center">
+                <button class="btn btn-warning" ng-click="first()">Trang đầu</button>
+                <button class="btn btn-info" ng-click="prev()">Trang trước</button>
+                <button class="btn btn-info" ng-click="next()">Trang kế</button>
+                <button class="btn btn-warning" ng-click="last()">Trang cuối</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script src="js/theloai.js"></script>
+
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope, $http) {
+        $scope.listsanpham = [];
+        $scope.sx="-price";
+        $http.get("Prods.js").then(
+            function (r) {
+                $scope.listsanpham = r.data;
+            },
+            function (d) {
+                alert('Lỗi: ' + d.statusText);
+            }
+        );
+        $scope.sortBy = function(what){
+            $scope.sx = what;
+        }
+        $scope.pageSize = 8;
+        $scope.start = 0;
+
+        $scope.next = function(){
+            if($scope.start < $scope.listsanpham.length - $scope.pageSize){
+                $scope.start += $scope.pageSize;
+            }
+        }
+
+        $scope.prev = function(){
+            if($scope.start>0){
+                $scope.start -= $scope.pageSize;
+            }
+        }
+
+        $scope.first = function(){ $scope.start = 0;}
+
+        $scope.last = function(){
+            var sotrang = Math.ceil($scope.listsanpham.length / $scope.pageSize);
+            $scope.start = (sotrang - 1) * $scope.pageSize;
+        }
+
+    });
+    app.filter("phantram", function ($filter) {
+        return function (input, decimals) {
+            return $filter('number')(input * 100, decimals) + '%';
+        };
+    });
+</script>
+
+
+</html>

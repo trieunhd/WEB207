@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>QUẢN TRỊ THỂ LOẠI</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="myctrl">
+        <div class="card  ">
+            <div class="card-header fw-bold row">
+                <div class="col-9">
+                    <i class="fas fa-edit me-2"></i> BÁN HÀNG GIẢI KHÁT
+                </div>
+                <div class="col-3">
+                    Hôm nay: {{homnay}}
+                </div>
+            </div>
+            <div class="card-body p-2">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" ng-model="all">
+                            </th>
+                            <th scope="col">TÊN HÀNG</th>
+                            <th scope="col">SỐ LƯỢNG</th>
+                            <th scope="col">ĐƠN GIÁ</th>
+                            <th scope="col">TIỀN</th>
+                            <th scope="col">KHUYẾN MÃI</th>
+                            <th scope="col">CÒN LẠI</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="sp in sanpham| orderBy:'-price'" ng-init="sp.quantity = 0">
+                            <td>
+                                <input type="checkbox" ng-model="sp.buy" ng-checked="all">
+                                </th>
+                            <td>{{sp.name|uppercase }}</td>
+                            <td>
+                                <div class="form-outline">
+                                    <input type="number" ng-model="sp.quantity" ng-disabled="!sp.buy" min="0" max="25"
+                                        required id="form1" class="form-control form-icon-trailing" />
+                                    <i ng-if="sp.quantity < 0 || sp.quantity > 25"
+                                        class="fas fa-exclamation-circle trailing"></i>
+                                    <div ng-show="sp.quantity < 0 || sp.quantity > 25" class="form-helper">Nhập số lượng
+                                        từ 1 đến 25</div>
+                                </div>
+                            </td>
+                            <td>{{sp.price|number }}</td>
+                            <td>{{sp.price * sp.quantity|number }} VNĐ</td>
+                            <td>{{TinhKhuyenMai(sp.quantity)|number}}</td>
+                            <td>{{(sp.price * sp.quantity) - TinhKhuyenMai(sp.quantity)|number }} VNĐ</td>
+                            <td>{{sp.buy}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted">
+                TỔNG TIỀN: {{getAmount()}}
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script src="js/theloai.js"></script>
+
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope, $http) {
+        var today = new Date();
+        $scope.homnay = today.getDate() + '/' + (today.getMonth() + 1) + '/' + today.getFullYear();
+        $scope.sanpham = [];
+        $http.get("js/sanpham.js").then(
+            function (r) {
+                $scope.sanpham = r.data;
+            },
+            function (d) {
+                alert('Lỗi: ' + d.statusText);
+            }
+        );
+        $scope.getAmount = function () {
+            var amount = 0;
+            for (var i = 0; i < $scope.sanpham.length; i++) {
+                if ($scope.sanpham[i].buy) {
+                    amount += $scope.sanpham[i].price * $scope.sanpham[i].quantity;
+                }
+            }
+            return amount;
+        }
+
+
+        $scope.TinhKhuyenMai = function (sl) {
+            if (sl >= 15) return 100000;
+            else if (sl >= 10) return 60000;
+            else if (sl >= 5) return 20000;
+            else return 0;
+        }
+
+      
+
+    });
+</script>
+
+
+</html>

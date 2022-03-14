@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-header">
+        Các môn học
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" ng-repeat="mh in cacmonhoc|orderBy: 'Name'">{{mh.Name|uppercase}}</li>
+
+    </ul>
+</div>

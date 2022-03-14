@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Profile</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <br>
+        <div class="col-4 m-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4>{{titleapp}}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Tên đăng nhập: {{sv.username}}</li>
+                        <li class="list-group-item">Họ tên: {{sv.fullname}}</li>
+                        <li class="list-group-item">Email: {{sv.email}}</li>
+                        <li class="list-group-item">Phái: {{sv.gender}}</li>
+                        <li class="list-group-item">Ngày sinh: {{sv.birthday}}</li>
+                        <li class="list-group-item">Học phí: {{sv.schoolfee}}</li>
+                        <li class="list-group-item">Điểm: {{sv.marks}}</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <i>Phái: true là nam, false là Nữ</i>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div> <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script>
+
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", myfunc);
+    function myfunc($scope) {
+        //code tính toán và gán giá trị biến trong angularJS 
+        $scope.titleapp = "THÔNG TIN SINH VIÊN";
+        $scope.sv = {
+            username: "teonv",
+            password: "iloveyou",
+            fullname: "Nguyễn Văn Tèo",
+            email: "teonv@fpt.edu.vn",
+            gender: "true",
+            birthday: "2020-12-21",
+            schoolfee: "1500000",
+            marks: "0"
+        }
+    }
+
+</script>
+
+</html>

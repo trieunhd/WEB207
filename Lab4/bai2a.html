@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>List User</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div ng-controller="myctrl">
+        <div class="container mt-3">
+            <h2>List User</h2>
+            <p>Nhập vào ô tìm kiếm để lọc theo tên, họ hoặc email trong bảng:</p>
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Fullname</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Schoolfree</th>
+                    </tr>
+                </thead>
+                <tbody id="myTable">
+                    <tr ng-repeat="u in users">
+                        <td>{{u.username}}</td>
+                        <td>{{u.password}}</td>
+                        <td>{{u.fullname}}</td>
+                        <td>{{u.email}}</td>
+                        <td>{{u.gender}}</td>
+                        <td>{{u.schoolfee}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Lưu ý rằng chúng tôi bắt đầu tìm kiếm trong tbody, để ngăn chặn việc lọc các tiêu đề bảng.</p>
+        </div>
+    </div>
+
+
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script>
+
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", myfunc);
+    function myfunc($scope) {
+        //code tính toán và gán giá trị biến trong angularJS 
+        $scope.titleapp = "THÔNG TIN SINH VIÊN";
+        $scope.users = [
+            {
+                username: "teonv",
+                password: "iloveyou",
+                fullname: "Nguyễn Văn Tèo",
+                email: "teonv@fpt.edu.vn",
+                gender: "true",
+                birthday: "2020-12-21",
+                schoolfee: "1500000",
+                marks: "0"
+            },
+            {
+                username: "pheonv",
+                password: "iloveyou",
+                fullname: "Nguyễn Văn Phèo",
+                email: "pheonv@fpt.edu.vn",
+                gender: "true",
+                birthday: "1985-10-11",
+                schoolfee: "2500000",
+                marks: "0"
+            },
+            {
+                username: "nopt",
+                password: "iloveyou",
+                fullname: "Phạm Thị Nở",
+                email: "nopt@fpt.edu.vn",
+                gender: "false",
+                birthday: "1993-05-15",
+                schoolfee: "2000000",
+                marks: "0"
+            }
+
+        ];
+    }
+</script>
+<script>
+    $(document).ready(function () {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+</html>

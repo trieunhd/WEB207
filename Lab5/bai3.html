@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Detail</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.css" rel="stylesheet" />
+    <!-- AngularJs 1.7.9-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="myctrl">
+        <header class="row">
+            <div class="shopping-mall col-sm-8">
+                <h1>Online shopping mall</h1>
+                <h5>The center point of professional programming</h5>
+            </div>
+            <div class="d-flex flex-row-reverse">
+                <img class="col-sm-4" src="images/header-object.png" alt="">
+
+            </div>
+        </header>
+        <nav class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">My Logo</a>
+                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Giới thiệu</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Liên hệ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Góp ý</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Hỏi đáp</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-mdb-toggle="dropdown" aria-expanded="false">
+                                    Tài khoản
+                                </a>
+                                <!-- Dropdown menu -->
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đăng nhập</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Quên mật khẩu</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đăng ký thành viên</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đăng xuất</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Cập nhật hồ sơ</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Đơn hàng</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Hàng đã mua</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <span class="navbar-text">
+                            Ngôn ngữ
+                        </span>
+                    </div>
+                </div>
+            </nav>
+        </nav>
+        <div class="row py-2">
+            <article class="col-sm-9">
+                <!-- Page Content -->
+                <div class="container">
+
+                    <h1 class="fw-light text-center mt-4 mb-0">DANH MỤC SẢN PHẨM</h1>
+
+                    <hr class="mt-2 mb-5">
+
+                    <div class="row text-center text-lg-start">
+                        <div class="col-lg-3 col-md-4 col-6 py-2" ng-repeat="p in products">
+                            <div class="card h-100 text-center">
+                                <div class="card-header bg-light bg-gradient">
+                                    <span class="card-title">{{p.name}}</span>
+                                </div>
+                                <div class="card-body">
+                                    <img src="images/{{p.image}}" class="img-fluid img-thumbnail" alt="{{p.name}}" />
+                                </div>
+                                <div class="card-footer bg-light.bg-gradient">
+                                    <span class="card-text">{{p.price | currency: 'VNĐ '}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                 
+                        
+
+                    </div>
+
+                </div>
+            </article>
+            <aside class="col-sm-3">
+                <div class="card border shadow-0 mb-3">
+                    <div class="card-header">GIỎ HÀNG</div>
+                    <div class="card-body row">
+                        <img class="col-sm-5" src="images/shoppingcart.gif" alt="">
+                        <ul class="list-group col-sm-7">
+                            <li class="list-group-item">100 items</li>
+                            <li class="list-group-item">$ 56.8</li>
+                            <li class="list-group-item"><a href="">View Cart</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card border shadow-0 mb-3 mt-2">
+                    <div class="card-header">TÌM KIẾM</div>
+                    <div class="card-body row">
+                        <div class="form-outline">
+                            <form>
+                                <div class="form-outline mb-4">
+                                    <input type="text" id="form1Example1" class="form-control" />
+                                    <label class="form-label" for="form1Example1">Search</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-mdb-toggle="collapse"
+                                data-mdb-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="fas fa-list me-2"></i> CHỦNG LOẠI
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-mdb-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li
+                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                                        Điện thoại di động
+                                        <span class="badge bg-primary rounded-pill">14</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                                        Máy tính xách tay
+                                        <span class="badge bg-warning rounded-pill">124</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                                        Máy tính để bàn
+                                        <span class="badge bg-info rounded-pill">213</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                                        Tủ lạnh
+                                        <span class="badge bg-danger rounded-pill">124</span>
+                                    </li>
+                                    <li
+                                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                                        Quạt máy
+                                        <span class="badge bg-dark rounded-pill">144</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                                data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="fab fa-react me-2"></i> NHÀ SẢN XUẤT
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-mdb-parent="#accordionExample">
+                            <div class="accordion-body m-0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item list-group-item-action">SamSung</li>
+                                    <li class="list-group-item list-group-item-action">Apple</li>
+                                    <li class="list-group-item list-group-item-action">Sony</li>
+                                    <li class="list-group-item list-group-item-action">LG</li>
+                                    <li class="list-group-item list-group-item-action">Lenovo</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                                    data-mdb-target="#collapseThree" aria-expanded="false"
+                                    aria-controls="collapseThree">
+                                    <i class="fas fa-star me-2"></i> HÀNG ĐẶT BIỆT
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-mdb-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item list-group-item-action">Điện thoại củ giá rẻ</li>
+                                        <li class="list-group-item list-group-item-action">Khuyến mãi cực sốc</li>
+                                        <li class="list-group-item list-group-item-action">Wùa tặng tiền mặt</li>
+                                        <li class="list-group-item list-group-item-action">Ưu đãi sinh viên</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <br>
+        <footer class="bg-light text-center text-lg-start">
+            <!-- Copyright -->
+            <p class="text-center">FPT Polyteachnic &copy; 2017. All rights reserved.</p>
+            <!-- Copyright -->
+        </footer>
+
+    </div>
+
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.2/mdb.min.js"></script>
+</body>
+<script>
+    var app = angular.module("myapp", []);
+    app.controller("myctrl", function ($scope) {
+        $scope.products = [
+            { name: "Samsung Galaxy Tab A", image: "1.png", price: 1000 },
+            { name: "Máy tính bảng Mobell", image: "2.png", price: 1500 },
+            { name: "Điện thoại Iphone 8", image: "3.png", price: 2000 },
+            { name: "Điện thoại BlackBarry", image: "4.png", price: 3000 },
+            { name: "Điện thoại Realme 5", image: "5.png", price: 2000 },
+            { name: "Điện thoại Nokia 3.2", image: "6.png", price: 1700 },
+            { name: "Điện thoại Nokia 3.2", image: "4.png", price: 2000 },
+            { name: "Điện thoại Nokia 3.2", image: "6.png", price: 1300 }
+        ];
+    })
+</script>
+
+</html>

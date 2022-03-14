@@ -1,0 +1,20 @@
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action" 
+        ng-repeat="t in listtin|orderBy:sx|limitTo: pageSize:start">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{t.TieuDe}}</h5>
+            <small class="text-muted">{{t.Ngay|date:'dd/MM.yyyy'}}  </small>
+        </div>
+        <p class="mb-1">
+            {{t.TomTat}}
+        </p>
+        <small class="text-muted">Xem chi tiết</small>
+    </a>
+</div>
+<div class="card-footer text-center">
+    <button class="btn btn-warning" ng-click="first()">Trang đầu</button>
+    <button class="btn btn-info" ng-click="prev()">Trang trước</button>
+    <button class="btn btn-info" ng-click="next()">Trang kế</button>
+    <button class="btn btn-warning" ng-click="last()">Trang cuối</button>
+
+</div>
