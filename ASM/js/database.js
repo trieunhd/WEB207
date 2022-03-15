@@ -25,30 +25,30 @@ app.controller("myctrl",
         $scope.index = -1;
 
         // SelectAll Realtime
-        // const dbRef = ref(db, 'users');
-        // onValue(dbRef, (snapshot) => {
-        //   snapshot.forEach((childSnapshot) => {
-        //     const childKey = childSnapshot.key;
-        //     const childData = childSnapshot.val();
-        //     $scope.users.push(childSnapshot.val());
-        //     // ...
-        //   });
-        // }, {
-        //   onlyOnce: true
-        // });
+        const dbRef = ref(db, 'users');
+        onValue(dbRef, (snapshot) => {
+          snapshot.forEach((childSnapshot) => {
+            const childKey = childSnapshot.key;
+            const childData = childSnapshot.val();
+            $scope.users.push(childSnapshot.val());
+            // ...
+          });
+        }, {
+          onlyOnce: true
+        });
         // console.log($scope.users);
 
         //SelectAll
-        const dbRef = ref(getDatabase());
-        get(child(dbRef, 'users')).then((snapshot) => {
-            if (snapshot.exists()) {
-                $scope.users = snapshot.val();
-            } else {
-                console.log("No data available");
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
+        // const dbRef = ref(getDatabase());
+        // get(child(dbRef, 'users')).then((snapshot) => {
+        //     if (snapshot.exists()) {
+        //         $scope.users = snapshot.val();
+        //     } else {
+        //         console.log("No data available");
+        //     }
+        // }).catch((error) => {
+        //     console.error(error);
+        // });
 
 
         $scope.edit = function(chiso){
@@ -67,15 +67,15 @@ app.controller("myctrl",
         }
 
         $scope.insert = function () {
-            // $scope.users.push(angular.copy($scope.student));
-            // $scope.reset();
-            set(ref(db, 'users/' + $scope.user.userId), {
+            set(ref(db, 'users/'  + $scope.user.userId), {
                 username: $scope.user.username,
                 email: $scope.user.email,
                 profile_picture: $scope.user.profile_picture
             })
                 .then(() => {
                     alert("insert done!");
+                    // $scope.users.push(angular.copy($scope.student));
+                    $scope.reset();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -84,8 +84,6 @@ app.controller("myctrl",
         }
 
         $scope.update = function(){
-            // $scope.students[$scope.index] = angular.copy($scope.student);
-
             update(ref(db, 'users/' + $scope.user.userId), {
                 username: $scope.user.username,
                 email: $scope.user.email,
@@ -93,6 +91,7 @@ app.controller("myctrl",
             })
                 .then(() => {
                     alert("update done!");
+                    $scope.users[$scope.index] = angular.copy($scope.user);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -112,8 +111,6 @@ app.controller("myctrl",
                 alert("remove fail: " + error);
             })
         }
-
-        // window.onload = $scope.cancel();
 
 
     }

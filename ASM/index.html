@@ -61,6 +61,7 @@
         <table class="table table-bordered border-primar">
             <thead>
                 <tr class="bg-warning">
+                    <th scope="col">ID</th>
                     <th scope="col">Username</th>
                     <th scope="col">Email</th>
                     <th scope="col">ImageUrl</th>
@@ -69,6 +70,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="u in users">
+                    <td>{{u.userId}}</td>
                     <td>{{u.username}}</td>
                     <td>{{u.email}}</td>
                     <td>{{u.profile_picture}}</td>
