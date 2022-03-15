@@ -17,7 +17,14 @@
     <!-- Jquery 3.5.1 -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <!-- Database -->
-    <script src="js/database.js" type="module"></script>
+    <script src="js/db.js" type="module"></script>
+
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
 </head>
 
@@ -29,8 +36,8 @@
             </div>
             <div class="card-body">
                 <div class="form-outline mb-4">
-                    <input ng-model="user.userId" type="text" id="userId" class="form-control" />
-                    <label class="form-label" for="userId">User Id</label>
+                    <input type="text" id="userId" class="form-control" />
+                    <label class="form-label" for="userId">#</label>
                 </div>
 
                 <div class="form-outline mb-4">
@@ -47,7 +54,7 @@
                     <input ng-model="user.profile_picture" type="text" id="imageUrl" class="form-control" />
                     <label class="form-label" for="imageUrl">ImageUrl</label>
                 </div>
-                <button class="btn btn-primary" >SELECT </button>
+                <button class="btn btn-primary" ng-click="findAll()">SELECT </button>
                 <button class="btn btn-secondary" ng-click="insert()" ng-show="index==-1"
                     ng-disabled="index != -1">INSERT </button>
                 <button class="btn btn-success" ng-click="update()" ng-disabled="index == -1">UPDATE</button>
@@ -70,7 +77,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="u in users">
-                    <td>{{u.userId}}</td>
+                    <td>{{index+1}}</td>
                     <td>{{u.username}}</td>
                     <td>{{u.email}}</td>
                     <td>{{u.profile_picture}}</td>

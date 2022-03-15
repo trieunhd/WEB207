@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-import { getDatabase, ref, get, set, child, update, remove, push ,onValue } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+import { getDatabase, ref, get, set, child, update, remove, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCcdF5DkLxkgN0JnrKygfNJWeOxQy3OlhU",
@@ -16,27 +16,28 @@ const firebaseConfig = {
 var firebase = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-
 var app = angular.module("myapp", []);
 app.controller("myctrl",
     function ($scope) {
         $scope.users = [];
         $scope.user = {};
         $scope.index = -1;
+        const childData = [];
 
         // SelectAll Realtime
         const dbRef = ref(db, 'users');
         onValue(dbRef, (snapshot) => {
-          snapshot.forEach((childSnapshot) => {
-            const childKey = childSnapshot.key;
-            const childData = childSnapshot.val();
-            $scope.users.push(childSnapshot.val());
-            // ...
-          });
+            snapshot.forEach((childSnapshot) => {
+                childData.push(childSnapshot.val());
+                // ...
+            });
         }, {
-          onlyOnce: true
+            onlyOnce: true
         });
-        // console.log($scope.users);
+        $scope.users = childData;
+        console.log($scope.users);
+
+
 
         //SelectAll
         // const dbRef = ref(getDatabase());
@@ -51,39 +52,41 @@ app.controller("myctrl",
         // });
 
 
-        $scope.edit = function(chiso){
+        $scope.edit = function (chiso) {
             $scope.index = chiso;
             $scope.user = angular.copy($scope.users[chiso]);
         }
 
-        $scope.reset = function(){
+        $scope.reset = function () {
             $scope.user = {};
             $scope.index = -1;
+            alert("da vao reset")
         }
 
-        $scope.cancel = function(){
-            if($scope.index == -1) $scope.reset();
+        $scope.cancel = function () {
+            if ($scope.index == -1) $scope.reset();
             else $scope.edit($scope.index);
         }
 
         $scope.insert = function () {
-            set(ref(db, 'users/'  + $scope.user.userId), {
+            set(ref(db, 'users/' + $scope.user.userId), {
                 username: $scope.user.username,
                 email: $scope.user.email,
                 profile_picture: $scope.user.profile_picture
             })
                 .then(() => {
                     alert("insert done!");
-                    // $scope.users.push(angular.copy($scope.student));
+                    $scope.users.push(angular.copy($scope.user));
                     $scope.reset();
                 })
                 .catch((error) => {
                     console.log(error);
                     alert("insert fail: " + error);
                 })
+
         }
 
-        $scope.update = function(){
+        $scope.update = function () {
             update(ref(db, 'users/' + $scope.user.userId), {
                 username: $scope.user.username,
                 email: $scope.user.email,
@@ -92,6 +95,7 @@ app.controller("myctrl",
                 .then(() => {
                     alert("update done!");
                     $scope.users[$scope.index] = angular.copy($scope.user);
+                    console.log($scope.users[$scope.index]);
                 })
                 .catch((error) => {
                     console.log(error);
@@ -100,16 +104,16 @@ app.controller("myctrl",
 
         }
 
-        $scope.delete = function(){
-            // $scope.students.splice($scope.index, 1);
-            // $scope.reset();
+        $scope.delete = function () {
             remove(ref(db, 'users/' + $scope.user.userId))
-            .then(() => {
-                alert("remove done!");
-            })
-            .catch((error) => {
-                alert("remove fail: " + error);
-            })
+                .then(() => {
+                    alert("remove done!");
+                    $scope.users.splice($scope.index, 1);
+                    $scope.reset();
+                })
+                .catch((error) => {
+                    alert("remove fail: " + error);
+                })
         }
 
 
