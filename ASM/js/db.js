@@ -20,13 +20,22 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
         $scope.users = [];
         $scope.user = {};
         $scope.index = -1;
+        $scope.curId = '';
+
         var ref = firebase.database().ref("users");
         var obj = $firebaseArray(ref);
         $scope.users = obj;
 
-        $scope.edit = function (chiso) {
+        obj.$loaded().then(function(){
+            angular.forEach(obj, function(value, key){
+            })
+        })
+
+        $scope.edit = function (chiso, id) {
             $scope.index = chiso;
             $scope.user = angular.copy($scope.users[chiso]);
+            $scope.curId = id;
+            // alert($scope.curId);
         }
         $scope.reset = function () {
             $scope.user = {};
@@ -50,13 +59,19 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
 
 
         $scope.update = function () {
-            $scope.users.$save({
+            var ref2 = firebase.database().ref("users/" +  $scope.curId);
+            ref2.update({
                 username: $scope.user.username,
                 email: $scope.user.email,
                 profile_picture: $scope.user.profile_picture
             });
             alert("update done!");
+        }
 
+        $scope.delete = function () {
+            var ref2 = firebase.database().ref("users/" +  $scope.curId);
+            ref2.remove();
+            alert("update done!");
         }
 
     }

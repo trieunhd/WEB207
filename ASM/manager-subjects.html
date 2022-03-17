@@ -6,8 +6,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Font Awe        var ref = firebase.database().ref("users");
-some -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
@@ -18,14 +16,11 @@ some -->
     <!-- Jquery 3.5.1 -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <!-- Database -->
-    <script src="js/db.js" type="module"></script>
-
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-
-<!-- AngularFire -->
-<script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+    <script src="js/subjects.js" type="module"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
 
 </head>
 
@@ -33,22 +28,22 @@ some -->
     <div ng-controller="myctrl" class="col-8 m-auto py-3">
         <div class="card">
             <div class="card-header bg-warning">
-                <i class="fas fa-list me-2"></i> FORM USERS
+                <i class="fas fa-list me-2"></i> FORM SUBJECTS
             </div>
             <div class="card-body">
                 <div class="form-outline mb-4">
-                    <input ng-model="user.username" type="text" id="username" class="form-control" />
-                    <label class="form-label" for="username">Username</label>
+                    <input ng-model="subject.id" type="text" class="form-control" />
+                    <label class="form-label">Subject ID</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input ng-model="user.email" type="text" id="email" class="form-control" />
-                    <label class="form-label" for="email">Email</label>
+                    <input ng-model="subject.name" type="text" class="form-control" />
+                    <label class="form-label">Name</label>
                 </div>
 
                 <div class="form-outline mb-4">
-                    <input ng-model="user.profile_picture" type="text" id="imageUrl" class="form-control" />
-                    <label class="form-label" for="imageUrl">ImageUrl</label>
+                    <input ng-model="subject.logo" type="text" class="form-control" />
+                    <label class="form-label">Logo</label>
                 </div>
                 <button class="btn btn-primary" ng-click="findAll()">SELECT </button>
                 <button class="btn btn-secondary" ng-click="insert()" ng-show="index==-1"
@@ -64,19 +59,19 @@ some -->
         <table class="table table-bordered border-primar">
             <thead>
                 <tr class="bg-warning">
-                    <th scope="col">ID</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">ImageUrl</th>
+                    <th scope="col">Row</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Logo</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="u in users">
-                    <td>{{u.$id}}</td>
-                    <td>{{u.username}}</td>
-                    <td>{{u.email}}</td>
-                    <td>{{u.profile_picture}}</td>
+                <tr ng-repeat="item in subjects">
+                    <td>{{item.$id}}</td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.logo}}</td>
                     <td><button class="btn" ng-click="edit($index, u.$id)">Sửa</button></td>
                 </tr>
             </tbody>
