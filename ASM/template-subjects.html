@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row py-4 m-2">
+        <div class="col-md-7 p-4 border rounded-3">
+            <div class="p-4 bg-light bg-gradient text-dark border rounded ">
+                <div class="input-group rounded">
+                    <input type="search" class="form-control" placeholder="Nhập mã tham gia"
+                        aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-primary">Tham gia</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"> <br></div>
+        <!-- Jumbotron -->
+        <div class="col-md-4 p-4 shadow-4 rounded-3 text-white text-center"
+            style="background-image: linear-gradient(117deg,#5a4be7,#c86dd7 102%)">
+            <small>Làm quiz không quảng cáo để trở siêu cấp VIP PRO</small>
+            <hr>
+            <button type="button" class="btn btn-warning btn-sm btn-rounded py-2">NÂNG CẤP VIP</button>
+        </div>
+        <!-- Jumbotron -->
+    </div>
+    <div class="">
+        <p class="fs-3">Danh sách các bài thi</p>
+        <hr>
+        <div class="row">
+            <div class="col-6 col-md-3" ng-repeat="item in subjects|limitTo: pageSize:start">
+                <!-- Jumbotron -->
+                <div class="p-4 shadow-4 rounded-3 text-white text-center hover-zoom hover-shadow ripple"
+                    style="background-image: linear-gradient(117deg,#5a4be7,#c86dd7 102%)">
+                    <img class="w-50" src="images/logos/{{item.logo}}" alt="">
+                </div>
+                <!-- Jumbotron -->
+                <div class="row">
+                    <a href="#!quiz/{{item.id}}" class="col-12 py-2 text-truncate" style="font-weight: 600;">{{item.name}}</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button class="btn btn-warning" ng-click="first()">Trang đầu</button>
+            <button class="btn btn-info" ng-click="prev()">Trang trước</button>
+            <button class="btn btn-info" ng-click="next()">Trang kế</button>
+            <button class="btn btn-warning" ng-click="last()">Trang cuối</button>
+
+        </div>
+    </div>
+
+</div>

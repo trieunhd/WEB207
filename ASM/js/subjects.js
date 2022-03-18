@@ -12,10 +12,110 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+var app = angular.module("myapp", ["firebase", "ngRoute"]);
 
-var app = angular.module("myapp", ["firebase"]);
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when("/", { templateUrl: "home.html" })
+        .when("/join", {
+            templateUrl: "template-subjects.html",
+            controller: 'subjectsCtrl'
+
+        })
+        .when("/quiz/:subjectCode", {
+            templateUrl: "template-quiz.html",
+            controller: 'QuizCtrl'
+        })
+})
+
+app.factory('quizFactory', ['$firebaseArray', function ($firebaseArray) {
+    var quizFactory = {};
+    var question = [];
+
+    quizFactory.getQuestions = function (subjectCode) {
+        var ref = firebase.database().ref("quiz/" + subjectCode);
+        var obj = $firebaseArray(ref);
+        $scope.question = obj;
+        return obj;
+    }
+
+    return quizFactory;
+}
+])
+
+app.controller("QuizCtrl", ["$scope", "$firebaseArray", "$routeParams", "$interval",
+    function ($scope, $firebaseArray, quizFactory, $routeParams, $interval) {
+        $scope.currentQuestion = 0;
+        $scope.questions = [];
+        $scope.time = 30;
+        $scope.quizMarks = 0;
+        $scope.answer = {};
+
+        var stop = $interval(()=>{$scope.time --}, 1000);
+        // quizFactory.getQuestions($routeParams.subjectCode)
+        //     .then((data)=>{
+        //         $scope.questions = data;
+        //     });
+        $scope.question = function () {
+            return $scope.questions[$scope.currentQuestion];
+        };
+        $scope.setQuestionIndex = function (newIndex) {
+            if ($scope.answer.choice == $scope.question().answerId) {
+                $scope.quizMarks += $scope.question().marks;
+            }
+            $scope.currentQuestion = newIndex;
+
+            return $scope.currentQuestion;
+        };
+        $scope.questionTotal = function () {
+            return $scope.questions.length;
+        };
+        $scope.sumup = false;
+        $scope.submitQuiz = function () {
+            if ($scope.answer === $scope.question().answerId) {
+                $scope.quizMarks += $scope.question().marks;
+            }
+            $scope.sumup = true;
+            $interval.cancel(stop);
+        }
+    }
+]);
+
+app.controller("subjectsCtrl", ["$scope", "$firebaseArray",
+    function ($scope, $firebaseArray) {
+        $scope.subjects = [];
+        $scope.subject = {};
+        var ref = firebase.database().ref("subjects");
+        var obj = $firebaseArray(ref);
+        $scope.subjects = obj;;
+
+        $scope.pageSize = 8;
+        $scope.start = 0;
+
+        $scope.next = function () {
+            if ($scope.start < $scope.subjects.length - $scope.pageSize) {
+                $scope.start += $scope.pageSize;
+            }
+        }
+
+        $scope.prev = function () {
+            if ($scope.start > 0) {
+                $scope.start -= $scope.pageSize;
+            }
+        }
+
+        $scope.first = function () { $scope.start = 0; }
+
+        $scope.last = function () {
+            var sotrang = Math.ceil($scope.subjects.length / $scope.pageSize);
+            $scope.start = (sotrang - 1) * $scope.pageSize;
+        }
+
+    }
+]);
+
 app.controller("myctrl", ["$scope", "$firebaseArray", "$firebaseAuth",
-    function ($scope, $firebaseArray,$firebaseAuth) {
+    function ($scope, $firebaseArray, $firebaseAuth) {
         $scope.subjects = [];
         $scope.subject = {};
         $scope.index = -1;
@@ -26,15 +126,15 @@ app.controller("myctrl", ["$scope", "$firebaseArray", "$firebaseAuth",
         $scope.authObj = $firebaseAuth();
         $scope.firebaseUser = null;
 
-        $scope.signIn = function() {
-            $scope.authObj.$signInWithPopup("google").then(function(result) {
+        $scope.signIn = function () {
+            $scope.authObj.$signInWithPopup("google").then(function (result) {
                 console.log("Signed in as:", result.user.uid);
                 $scope.firebaseUser = result.user;
-                console.log( $scope.firebaseUser);
-              }).catch(function(error) {
+                console.log($scope.firebaseUser);
+            }).catch(function (error) {
                 console.error("Authentication failed:", error);
-              });
-          };
+            });
+        };
 
 
         obj.$loaded().then(function () {
@@ -86,31 +186,6 @@ app.controller("myctrl", ["$scope", "$firebaseArray", "$firebaseAuth",
             alert("update done!");
         }
 
-        $scope.pageSize = 8;
-        $scope.start = 0;
-
-        $scope.next = function () {
-            if ($scope.start < $scope.subjects.length - $scope.pageSize) {
-                $scope.start += $scope.pageSize;
-            }
-        }
-
-        $scope.prev = function () {
-            if ($scope.start > 0) {
-                $scope.start -= $scope.pageSize;
-            }
-        }
-
-        $scope.first = function () { $scope.start = 0; }
-
-        $scope.last = function () {
-            var sotrang = Math.ceil($scope.subjects.length / $scope.pageSize);
-            $scope.start = (sotrang - 1) * $scope.pageSize;
-        }
-
-        
-
-        
 
     }
 ]);
