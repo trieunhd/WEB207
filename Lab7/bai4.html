@@ -57,17 +57,19 @@
 </body>
 
 <script>
+    
+</script>
+<script>
     var app = angular.module("LabSPA", ["ngRoute"]);
     app.config(function ($routeProvider) {
         $routeProvider
             .when("/home", { template: "<h3>Đây là trang chủ</h3>" })
             .when("/:ten", { templateUrl: "hiendstin.html", controller:"hientin" })
     })
-</script>
-<script>
     app.controller("hientin", function($scope, $http, $routeParams){
         $scope.listtin=[];
         $scope.sx="-Ngay";
+        console.log($routeParams.ten);
         var tenfile = $routeParams.ten;
         var url = "tin/" + tenfile + ".js";
 

@@ -28,57 +28,60 @@ app.config(function ($routeProvider) {
         })
 })
 
-app.factory('quizFactory', ['$firebaseArray', function ($firebaseArray) {
-    var quizFactory = {};
-    var question = [];
 
-    quizFactory.getQuestions = function (subjectCode) {
-        var ref = firebase.database().ref("quiz/" + subjectCode);
-        var obj = $firebaseArray(ref);
-        $scope.question = obj;
-        return obj;
+app.controller("QuizCtrl", ["$routeParams", "$interval", "$scope", "$firebaseArray", function ($routeParams, $interval, $scope, $firebaseArray) {
+    $scope.currentQuestion = 0;
+    $scope.questions = [];
+    $scope.quizMarks = 0;
+    $scope.answer = {};
+
+    console.log($routeParams.subjectCode);
+    
+    var stop = $interval(function () { $scope.time-- }, 1000);
+    var ref = firebase.database().ref("quiz/"+$routeParams.subjectCode);
+    var obj = $firebaseArray(ref);
+  
+    $scope.questions = obj;
+
+    
+
+    obj.$loaded().then(function () {
+        angular.forEach(obj, function (key, value) {
+        })
+    })
+
+    console.log($scope.questions[1]);
+
+    $scope.edit = function (chiso, id) {
+        $scope.index = chiso;
+        $scope.user = angular.copy($scope.users[chiso]);
+        $scope.curId = id;
     }
 
-    return quizFactory;
-}
-])
 
-app.controller("QuizCtrl", ["$scope", "$firebaseArray", "$routeParams", "$interval",
-    function ($scope, $firebaseArray, quizFactory, $routeParams, $interval) {
-        $scope.currentQuestion = 0;
-        $scope.questions = [];
-        $scope.time = 30;
-        $scope.quizMarks = 0;
-        $scope.answer = {};
-
-        var stop = $interval(()=>{$scope.time --}, 1000);
-        // quizFactory.getQuestions($routeParams.subjectCode)
-        //     .then((data)=>{
-        //         $scope.questions = data;
-        //     });
-        $scope.question = function () {
-            return $scope.questions[$scope.currentQuestion];
-        };
-        $scope.setQuestionIndex = function (newIndex) {
-            if ($scope.answer.choice == $scope.question().answerId) {
-                $scope.quizMarks += $scope.question().marks;
-            }
-            $scope.currentQuestion = newIndex;
-
-            return $scope.currentQuestion;
-        };
-        $scope.questionTotal = function () {
-            return $scope.questions.length;
-        };
-        $scope.sumup = false;
-        $scope.submitQuiz = function () {
-            if ($scope.answer === $scope.question().answerId) {
-                $scope.quizMarks += $scope.question().marks;
-            }
-            $scope.sumup = true;
-            $interval.cancel(stop);
+    $scope.question = function () {
+        return $scope.questions[$scope.currentQuestion];
+    };
+    $scope.setQuestionIndex = function (newIndex) {
+        if ($scope.answer.choice == $scope.question().answerId) {
+            $scope.quizMarks += $scope.question().marks;
         }
+        $scope.currentQuestion = newIndex;
+
+        return $scope.currentQuestion;
+    };
+    $scope.questionTotal = function () {
+        return $scope.questions.length;
+    };
+    $scope.sumup = false;
+    $scope.submitQuiz = function () {
+        if ($scope.answer === $scope.question().answerId) {
+            $scope.quizMarks += $scope.question().marks;
+        }
+        $scope.sumup = true;
+        $interval.cancel(stop);
     }
+}
 ]);
 
 app.controller("subjectsCtrl", ["$scope", "$firebaseArray",
@@ -87,7 +90,7 @@ app.controller("subjectsCtrl", ["$scope", "$firebaseArray",
         $scope.subject = {};
         var ref = firebase.database().ref("subjects");
         var obj = $firebaseArray(ref);
-        $scope.subjects = obj;;
+        $scope.subjects = obj;
 
         $scope.pageSize = 8;
         $scope.start = 0;

@@ -24,16 +24,23 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
 
         var ref = firebase.database().ref("users");
         var obj = $firebaseArray(ref);
+        
         $scope.users = obj;
+
+    
 
         obj.$loaded().then(function(){
             angular.forEach(obj, function(value, key){
             })
         })
 
+       
+
+
         $scope.edit = function (chiso, id) {
             $scope.index = chiso;
             $scope.user = angular.copy($scope.users[chiso]);
+            console.log($scope.users);
             $scope.curId = id;
             // alert($scope.curId);
         }
@@ -50,13 +57,23 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
 
         $scope.insert = function () {
             $scope.users.$add({
-                username: $scope.user.username,
-                email: $scope.user.email,
-                profile_picture: $scope.user.profile_picture
+                Id: 25107,
+                Text: 'Trong IntentService, phương thức onHandlerIntent sẽ được tự động gọi trong phương thức nào?',
+                Marks: 1,
+                AnswerId: 104124,
+                Answers: [
+                    { "Id": 104122, "Text": "onServiceConnected()" },
+                    { "Id": 104123, "Text": "onServiceDisConnected()" },
+                    { "Id": 104124, "Text": "onStartCommand()" },
+                    { "Id": 104125, "Text": "onBind()" }
+                ]
             });
             alert("insert done!");
         }
 
+        $scope.show = function(){
+            console.log($scope.users);
+        }
 
         $scope.update = function () {
             var ref2 = firebase.database().ref("users/" +  $scope.curId);
