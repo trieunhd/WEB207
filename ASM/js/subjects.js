@@ -34,52 +34,47 @@ app.controller("QuizCtrl", ["$routeParams", "$interval", "$scope", "$firebaseArr
     $scope.questions = [];
     $scope.quizMarks = 0;
     $scope.answer = {};
+    $scope.time = 30;
 
     console.log($routeParams.subjectCode);
     
-    var stop = $interval(function () { $scope.time-- }, 1000);
+    var stop = $interval(function () { $scope.time-- }, 100000);
     var ref = firebase.database().ref("quiz/"+$routeParams.subjectCode);
     var obj = $firebaseArray(ref);
   
     $scope.questions = obj;
 
-    
-
-    obj.$loaded().then(function () {
-        angular.forEach(obj, function (key, value) {
-        })
-    })
-
-    console.log($scope.questions[1]);
-
-    $scope.edit = function (chiso, id) {
-        $scope.index = chiso;
-        $scope.user = angular.copy($scope.users[chiso]);
-        $scope.curId = id;
+    $scope.getQuestion = function () {
+        $scope.question = angular.copy($scope.questions[$scope.currentQuestion]);
+        console.log($scope.question);
+        console.log("ok");
+        return $scope.question;
     }
 
-
-    $scope.question = function () {
-        return $scope.questions[$scope.currentQuestion];
-    };
+    // $scope.question = function () {
+    //     $scope.question = angular.copy($scope.questions[$scope.currentQuestion]);
+    //     console.log($scope.question);
+    //     return $scope.question;
+    //     // return $scope.questions[$scope.currentQuestion];
+    // };
     $scope.setQuestionIndex = function (newIndex) {
-        if ($scope.answer.choice == $scope.question().answerId) {
-            $scope.quizMarks += $scope.question().marks;
+        if ($scope.answer.choice == $scope.getQuestion().AnswerId) {
+            $scope.quizMarks += $scope.getQuestion().Marks;
         }
         $scope.currentQuestion = newIndex;
 
         return $scope.currentQuestion;
     };
     $scope.questionTotal = function () {
-        return $scope.questions.length;
+        return $scope.getQuestions.length;
     };
     $scope.sumup = false;
     $scope.submitQuiz = function () {
-        if ($scope.answer === $scope.question().answerId) {
-            $scope.quizMarks += $scope.question().marks;
+        if ($scope.answer === $scope.getQuestion().AnswerId) {
+            $scope.quizMarks += $scope.getQuestion().Marks;
         }
         $scope.sumup = true;
-        $interval.cancel(stop);
+        $time.cancel(stop);
     }
 }
 ]);

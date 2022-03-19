@@ -26,7 +26,6 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
         var obj = $firebaseArray(ref);
         
         $scope.users = obj;
-
     
 
         obj.$loaded().then(function(){
@@ -40,7 +39,7 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
         $scope.edit = function (chiso, id) {
             $scope.index = chiso;
             $scope.user = angular.copy($scope.users[chiso]);
-            console.log($scope.users);
+            console.log($scope.users[0]);
             $scope.curId = id;
             // alert($scope.curId);
         }

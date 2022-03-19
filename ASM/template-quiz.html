@@ -6,13 +6,13 @@
 
             </div>
             <div class="col-4">
-                <small>Question {{currentQuestion}} : {{question().marks}} Marks</small>
+                <small>Question {{currentQuestion}} : {{getQuestion().Marks}} Marks</small>
             </div>
         </div>
         <div class="row bg-info rounded p-5 m-3">
-            <div class="text-center fs-2">{{question().text}}</div>
+            <div class="text-center fs-2">{{getQuestion().Text}}</div>
             <div class="py-1">
-                <div class="form-check" ng-repeat="item in question().answers">
+                <div class="form-check" ng-repeat="item in getQuestion().Answers">
                     <input ng-model="answer.choise" class="form-check-input" type="radio" name="answer" value="{{item.Id}}"/>
                     <label class="form-check-label">  {{item.Text}} </label>
                 </div>
@@ -30,6 +30,10 @@
 
                 <button ng-click="submitQuiz()">
                     Submit
+                </button>
+
+                <button ng-click="getQuestion()">
+                    check
                 </button>
             </div>
         </div>
