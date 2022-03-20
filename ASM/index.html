@@ -27,18 +27,19 @@
     <!-- Crypto -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="https://code.angularjs.org/1.8.0/angular-route.js"></script>
-
+    <link rel="stylesheet" href="https://wowjs.uk/css/libs/animate.css">
 </head>
 
-<body class="bg-gradient" ng-app="myapp" ng-controller="myctrl">
-    <div class="container">
+<body class="bg-gradient font-monospace" ng-app="myapp" ng-controller="myctrl">
+    <div class="">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <!-- Container wrapper -->
             <div class="container">
                 <!-- Navbar brand -->
                 <a class="navbar-brand me-2" href="#/!">
-                    <img src="images/logo.png" height="28" alt="Quizizz Logo" loading="lazy" style="margin-top: -1px;" />
+                    <img src="images/logo.png" height="28" alt="Quizizz Logo" loading="lazy"
+                        style="margin-top: -1px;" />
                 </a>
 
                 <!-- Toggle button -->
@@ -68,15 +69,15 @@
                         </li>
                     </ul>
                     <!-- Left links -->
-                    
 
-                    
+
+
                     <span ng-show="firebaseUser">
-                        {{ firebaseUser.displayName }} 
-                      </span>
+                        {{ firebaseUser.displayName }}
+                    </span>
                     <div class="d-flex align-items-center" ng-show="!firebaseUser">
                         <button type="button" class="btn btn-info px-3 me-2" ng-click="signIn()">
-                            Đăng nhập/Đăng ký bằng Google
+                            <i class="fab fa-google"></i> Đăng nhập/Đăng ký bằng Google
                         </button>
                     </div>
                     <!-- Avatar -->
@@ -105,9 +106,82 @@
         </nav>
         <!-- Navbar -->
         <main>
-            <div ng-view=""></div>
+            <div class="container" ng-view=""></div>
         </main>
+        <br><br>
+        <footer class="text-white text-center text-lg-start" style="background-color: #181821;">
+            <!-- Grid container -->
+            <div class="container p-4">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">DongTrieu.Name.VN</h5>
+                        <p><i class="far fa-credit-card"></i> Liên hệ cho tôi nếu bạn cần!</p>
+                        <p><i class="fas fa-phone"></i> 087 9053 778</p>
+                        <p><i class="far fa-envelope"></i> dongtrieuit@gmail.com</p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Về chúng tôi</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#!about" class="text-white">Giới thiệu</a>
+                            </li>
+                            <li>
+                                <a href="#!contact" class="text-white">Liên hệ</a>
+                            </li>
+                            <li>
+                                <a href="#!feedback" class="text-white">Góp ý</a>
+                            </li>
+                            <li>
+                                <a href="#!fqa" class="text-white">Hỏi đáp</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-0">Chưa biết để gì</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!" class="text-white">Link 1</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 2</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 3</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Link 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+                </div>
+                <!--Grid row-->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2022 Copyright:
+                <a class="text-white" href="https://dongtrieu.name.vn/">DongTrieu.name.vn</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
     </div>
+
+    <script src="https://wowjs.uk/dist/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>

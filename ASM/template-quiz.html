@@ -1,44 +1,52 @@
 <div class="container my-4" ng-if="sumup === false">
-    <div class="bg-dark text-light py-5">
+    <div class=" py-5 wow bounceInRight">
+
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                aria-valuenow="{{time}}" aria-valuemin="0" aria-valuemax="100" style="width: {{time}}%;"></div>
+        </div>
         <div class="row justify-content-between p-2">
             <div class="col-4">
-                <small class="m-1">Time : {{time}}</small>
+                <p class="m-1">Số điểm của câu này : {{getQuestion().Marks}}</p>
 
             </div>
+            <div class="col-4 text-center text-danger fw-bold wow shake" ng-show="time <30">Thời gian: {{time}}s</div>
             <div class="col-4">
-                <small>Question {{currentQuestion}} : {{getQuestion().Marks}} Marks</small>
+                <p class="float-end">{{currentQuestion+1}} / {{questionTotal()}}</p>
             </div>
         </div>
-        <div class="row bg-info rounded p-5 m-3">
+        <div class="row card rounded p-5 m-3">
             <div class="text-center fs-2">{{getQuestion().Text}}</div>
             <div class="py-1">
                 <div class="form-check" ng-repeat="item in getQuestion().Answers">
-                    <input ng-model="answer.choise" class="form-check-input" type="radio" name="answer" value="{{item.Id}}"/>
-                    <label class="form-check-label">  {{item.Text}} </label>
+                    <input ng-model="answer.choice" class="form-check-input" type="radio" name="answer"
+                        value="{{item.Id}}" />
+                    <label class="form-check-label"> {{item.Text}} </label>
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="col-md-6">
+                    <button class="btn btn-warning" ng-hide="currentQuestion == questions.length - 1"
+                        ng-click="setQuestionIndex(currentQuestion+1)">
+                        Next
+                    </button>
+
+                    <button class="btn btn-success" ng-click="submitQuiz()">
+                        Submit
+                    </button>
+                </div>
+                <div class="col-6">
+                    <div class="alert alert-primary" role="alert" ng-show="currentQuestion > 0">
+                       {{thongbao}}
+                      </div>
                 </div>
 
-
-                <button ng-hide="currentQuestion == 0"
-                        ng-click="setQuestionIndex(currentQuestion-1)">
-                    Previous
-                </button>
-
-                <button ng-hide="currentQuestion == questions.length - 1"
-                        ng-click="setQuestionIndex(currentQuestion+1)">
-                    Next
-                </button>
-
-                <button ng-click="submitQuiz()">
-                    Submit
-                </button>
-
-                <button ng-click="getQuestion()">
-                    check
-                </button>
             </div>
         </div>
     </div>
 </div>
+<br>
+<br>
 <div class="row" ng-if="sumup === true" ng-include="'sumup.html'">
 
 </div>

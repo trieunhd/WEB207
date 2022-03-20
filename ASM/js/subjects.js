@@ -17,6 +17,10 @@ var app = angular.module("myapp", ["firebase", "ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/", { templateUrl: "home.html" })
+        .when("/about", { templateUrl: "about.html" })
+        .when("/contact", { templateUrl: "contact.html" })
+        .when("/feedback", { templateUrl: "feedback.html" })
+        .when("/fqa", { templateUrl: "fqa.html" })
         .when("/join", {
             templateUrl: "template-subjects.html",
             controller: 'subjectsCtrl'
@@ -29,52 +33,56 @@ app.config(function ($routeProvider) {
 })
 
 
-app.controller("QuizCtrl", ["$routeParams", "$interval", "$scope", "$firebaseArray", function ($routeParams, $interval, $scope, $firebaseArray) {
+app.controller("QuizCtrl", ["$routeParams", "$interval","$scope", "$firebaseArray", function ($routeParams, $interval,$scope, $firebaseArray) {
     $scope.currentQuestion = 0;
     $scope.questions = [];
     $scope.quizMarks = 0;
     $scope.answer = {};
-    $scope.time = 30;
-
+    $scope.time = 35;
+    $scope.thongbao = "";
     console.log($routeParams.subjectCode);
     
-    var stop = $interval(function () { $scope.time-- }, 100000);
     var ref = firebase.database().ref("quiz/"+$routeParams.subjectCode);
     var obj = $firebaseArray(ref);
-  
+    var stop = $interval(()=> {
+        $scope.time --;
+        if($scope.time == 0){
+            $interval.cancel(stop);
+            $scope.sumup = true;
+        }
+    }, 1000);
+
     $scope.questions = obj;
 
     $scope.getQuestion = function () {
-        $scope.question = angular.copy($scope.questions[$scope.currentQuestion]);
-        console.log($scope.question);
-        console.log("ok");
+        // $scope.questions = $scope.questions.sort(() => Math.random() - 0.5)
+        $scope.question = $scope.questions[$scope.currentQuestion];
         return $scope.question;
     }
 
-    // $scope.question = function () {
-    //     $scope.question = angular.copy($scope.questions[$scope.currentQuestion]);
-    //     console.log($scope.question);
-    //     return $scope.question;
-    //     // return $scope.questions[$scope.currentQuestion];
-    // };
     $scope.setQuestionIndex = function (newIndex) {
         if ($scope.answer.choice == $scope.getQuestion().AnswerId) {
             $scope.quizMarks += $scope.getQuestion().Marks;
+            $scope.thongbao = "Đúng rồi! Angular đẹp trai :>";
+        }else{
+            $scope.thongbao = "Sai rồi thằng lolz";
         }
         $scope.currentQuestion = newIndex;
-
         return $scope.currentQuestion;
     };
+
     $scope.questionTotal = function () {
-        return $scope.getQuestions.length;
+        return $scope.questions.length;
     };
+
     $scope.sumup = false;
+
     $scope.submitQuiz = function () {
         if ($scope.answer === $scope.getQuestion().AnswerId) {
             $scope.quizMarks += $scope.getQuestion().Marks;
         }
         $scope.sumup = true;
-        $time.cancel(stop);
+        $interval.cancel(stop);
     }
 }
 ]);

@@ -17,15 +17,15 @@ firebase.initializeApp(firebaseConfig);
 var app = angular.module("myapp", ["firebase"]);
 app.controller("myctrl", ["$scope", "$firebaseArray",
     function ($scope, $firebaseArray) {
-        $scope.users = [];
-        $scope.user = {};
+        $scope.questions = [];
+        $scope.question = {};
         $scope.index = -1;
         $scope.curId = '';
 
         var ref = firebase.database().ref("quiz/ADAV");
         var obj = $firebaseArray(ref);
         
-        $scope.users = obj;
+        $scope.questions = obj;
     
 
         obj.$loaded().then(function(){
@@ -36,13 +36,13 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
 
         $scope.edit = function (chiso, id) {
             $scope.index = chiso;
-            $scope.user = angular.copy($scope.users[chiso]);
-            console.log($scope.users[0]);
+            $scope.question = angular.copy($scope.questions[chiso]);
+            console.log($scope.questions[0]);
             $scope.curId = id;
             // alert($scope.curId);
         }
         $scope.reset = function () {
-            $scope.user = {};
+            $scope.question = {};
             $scope.index = -1;
             alert("da vao reset")
         }
@@ -53,7 +53,7 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
         }
 
         $scope.insert = function () {
-            $scope.users.$add({
+            $scope.questions.$add({
                 Id: 25108,
                 Text: 'Khi nào phương thức ServiceConnection.onServiceConnected được gọi?',
                 Marks: 1,
@@ -81,21 +81,21 @@ app.controller("myctrl", ["$scope", "$firebaseArray",
         }
 
         $scope.show = function(){
-            console.log($scope.users);
+            console.log($scope.questions);
         }
 
         $scope.update = function () {
-            var ref2 = firebase.database().ref("users/" +  $scope.curId);
+            var ref2 = firebase.database().ref("questions/" +  $scope.curId);
             ref2.update({
-                username: $scope.user.username,
-                email: $scope.user.email,
-                profile_picture: $scope.user.profile_picture
+                questionname: $scope.question.questionname,
+                email: $scope.question.email,
+                profile_picture: $scope.question.profile_picture
             });
             alert("update done!");
         }
 
         $scope.delete = function () {
-            var ref2 = firebase.database().ref("users/" +  $scope.curId);
+            var ref2 = firebase.database().ref("questions/" +  $scope.curId);
             ref2.remove();
             alert("update done!");
         }

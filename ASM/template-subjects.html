@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row py-4 m-2">
+    <div class="row py-4 m-2 wow flipInX center">
         <div class="col-md-7 p-4 border rounded-3">
             <div class="p-4 bg-light bg-gradient text-dark border rounded ">
                 <div class="input-group rounded">
@@ -23,7 +23,7 @@
         <p class="fs-3">Danh sách các bài thi</p>
         <hr>
         <div class="row">
-            <div class="col-6 col-md-3" ng-repeat="item in subjects|limitTo: pageSize:start">
+            <div class="col-6 col-md-3 wow bounceInRight" ng-repeat="item in subjects|limitTo: pageSize:start">
                 <!-- Jumbotron -->
                 <div class="p-4 shadow-4 rounded-3 text-white text-center hover-zoom hover-shadow ripple"
                     style="background-image: linear-gradient(117deg,#5a4be7,#c86dd7 102%)">
@@ -37,10 +37,10 @@
             </div>
         </div>
         <div class="card-footer text-center">
-            <button class="btn btn-warning" ng-click="first()">Trang đầu</button>
-            <button class="btn btn-info" ng-click="prev()">Trang trước</button>
-            <button class="btn btn-info" ng-click="next()">Trang kế</button>
-            <button class="btn btn-warning" ng-click="last()">Trang cuối</button>
+            <button class="btn btn-warning" ng-click="first()"><i class="fas fa-angle-double-left"></i> Trang đầu</button>
+            <button class="btn btn-info" ng-click="prev()"><i class="fas fa-angle-left"></i> Trang trước</button>
+            <button class="btn btn-info" ng-click="next()">Trang kế <i class="fas fa-angle-right"></i></button>
+            <button class="btn btn-warning" ng-click="last()">Trang cuối <i class="fas fa-angle-double-right"></i></button>
 
         </div>
     </div>
